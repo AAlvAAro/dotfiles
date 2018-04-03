@@ -15,6 +15,7 @@ brew_apps=(
   macvim
   mongodb
   nvm
+  elixir
   postgresql
   python3
   tmux
@@ -65,6 +66,7 @@ mkdir -p /data/db
 brew tap caskroom/cask
 
 cask_apps=(
+  iterm2
   firefox
   google-chrome
   postico
