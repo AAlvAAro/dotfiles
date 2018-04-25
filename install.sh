@@ -19,8 +19,11 @@ brew_apps=(
   mono
   nvm
   elixir
+  phantomjs
   postgresql
   python3
+  redis
+  smlnj
   tmux
   tree
   wget
