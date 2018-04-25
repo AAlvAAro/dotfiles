@@ -48,15 +48,16 @@ fi
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-# Example aliases
+# Aliases
+alias delete_screenshots="rm -rf ~/Desktop/*.{jpg,jpeg,png,gif}"
 alias zshconfig="vim ~/.zshrc"
 alias vimconfig="vim ~/.vimrc"
-alias ohmyzsh="vim ~/.oh-my-zsh"
-
+alias ohmyzshconfig="vim ~/.oh-my-zsh"
 alias pg_start="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start"
-alias pg_stop="pg_ctl -D /usr/local/var/postgres stop -s -m fast"
-
-alias ctags_project="ctags -R . --language=ruby,javascript,elixir,python,typescript,html $(bundle list --paths)"
+alias pg_stop="pg_ctl -d /usr/local/var/postgres stop -s -m fast"
+alias ctags_project="ctags -R -f ./.git/tags . $(bundle list --paths)"
+alias rvmstart="source ~/.rvm/scripts/rvm"
+alias ngrok="/usr/local/bin/ngrok"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
