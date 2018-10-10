@@ -10,10 +10,12 @@ brew upgrade
 
 # Packages
 brew_apps=(
+  ack
   git
   gitkraken
   heroku/brew/heroku
   imagemagick
+  jmeter
   macvim
   mongodb
   mono
@@ -64,13 +66,17 @@ brew tap caskroom/cask
 
 cask_apps=(
   ccleaner
-  iterm2
+  docker
   firefox
+  gitkraken
   google-chrome
+  iterm2
+  kindle
   postico
-  recordit
+  postman
   rider
   robo-3t
+  rubymine
   slack
   skype
   spotify

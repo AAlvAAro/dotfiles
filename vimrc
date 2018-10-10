@@ -6,7 +6,7 @@ filetype off " required
 syntax enable
 
 set lines=100 columns=250
-set gfn=Monaco:h16
+set gfn=Monaco:h15
 set ruler
 set number
 set expandtab
