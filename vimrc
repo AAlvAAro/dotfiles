@@ -1,12 +1,13 @@
 set nocompatible              " be iMproved, required
 filetype off " required
 
-:let mapleader=","
+" :let mapleader=","
+:let mapleader = "\<tab>"
 
 syntax enable
 
 set lines=100 columns=250
-set gfn=Monaco:h15
+set gfn=OperatorMono:h16
 set ruler
 set number
 set expandtab
@@ -27,7 +28,7 @@ set smartindent
 set nowrap
 set linebreak
 set backspace=indent,eol,start
-set colorcolumn=81
+set colorcolumn=80
 set laststatus=2
 set shell=/bin/sh
 set tags=.git/tags
@@ -58,42 +59,74 @@ let g:ctrlp_custom_ignore = 'node_modules'
 autocmd BufWritePre * :%s/\s\+$//e
 autocmd BufWritePre * :%s/\t/  /e
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+if empty(glob('~/.vim/autoload/plug.vim'))
+silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+call plug#begin('~/.vim/bundle')
+
 
 " My plugins
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-rbenv'
-Plugin 'tpope/vim-rake'
-Plugin 'tpope/vim-bundler'
-Plugin 'tpope/vim-projectionist'
-Plugin 'tpope/vim-fugitive'
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rbenv'
+Plug 'tpope/vim-rake'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-fugitive'
 
-Plugin 'mileszs/ack.vim'
-Plugin 'szw/vim-tags'
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'scrooloose/nerdtree'
-Plugin 'jlanzarotta/bufexplorer'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'mattn/emmet-vim'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'isRuslan/vim-es6'
-Plugin 'pangloss/vim-javascript'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'mxw/vim-jsx'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'lilydjwg/colorizer'
-Plugin 'jbgutierrez/vim-babel'
-Plugin 'mattn/webapi-vim'
-Plugin 'ctrlpvim/ctrlp.vim'
+Plug 'mileszs/ack.vim'
+Plug 'szw/vim-tags'
+Plug 'thoughtbot/vim-rspec'
+Plug 'scrooloose/nerdtree'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'scrooloose/nerdcommenter'
+Plug 'flazz/vim-colorschemes'
+Plug 'mattn/emmet-vim'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'isRuslan/vim-es6'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'mxw/vim-jsx'
+Plug 'airblade/vim-gitgutter'
+Plug 'lilydjwg/colorizer'
+Plug 'jbgutierrez/vim-babel'
+Plug 'mattn/webapi-vim'
+Plug 'ctrlpvim/ctrlp.vim'
+
+Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'branch': 'release/1.x' }
+
+Plug 'SirVer/ultisnips'
+Plug 'mlaursen/vim-react-snippets'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'itchyny/lightline.vim'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-syntastic/syntastic'
+
+
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 1
+" let g:syntastic_haml_checkers = ['haml_lint']
+let g:syntastic_ruby_checkers = ['rubocop']
+let g:syntastic_scss_checkers = ['scss_lint']
+" let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_javascript_eslint_exe = 'eslint'
+let g:syntastic_error_symbol = '❌'
+let g:syntastic_style_error_symbol = '⁉️'
+let g:syntastic_warning_symbol = '⚠️'
+let g:syntastic_style_warning_symbol = '💩'
+
+map <C-t> :NERDTreeToggle<CR>
 
 " nerdcommenter setup
 let g:NERDSpaceDelims = 1
@@ -109,7 +142,39 @@ map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 let g:rspec_runner = "os_x_iterm2"
 
-colorscheme evening
+let g:UltiSnipsExpandTrigger="<C-l>"
+
+" air-line
+let g:airline_powerline_fonts = 1
+
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+"     " unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+"
+" " airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+
 
 " use 256 colors in terminal
 if !has("gui_running")
@@ -118,7 +183,10 @@ if !has("gui_running")
 endif
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
+call plug#end()            " required
+
+colorscheme spacegray
+
 filetype plugin indent on    " required
 
 " To ignore plugin indent changes, instead use:
