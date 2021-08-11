@@ -8,9 +8,9 @@ module.exports = {
         // or `'canary'` for less polished but more frequent updates
         updateChannel: 'stable',
         // default font size in pixels for all tabs
-        fontSize: 12,
+        fontSize: 14,
         // font family with optional fallbacks
-        fontFamily: 'Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+        fontFamily: 'Operator Mono',
         // default font weight: 'normal' or 'bold'
         fontWeight: 'normal',
         // font weight for bold characters: 'normal' or 'bold'
@@ -139,7 +139,8 @@ module.exports = {
         'hyperterm-tabs',
         "hyper-dracula",
         "gitrocket",
-        "hypercwd"
+        "hypercwd",
+        "dracula"
     ],
     // in development, you can create a directory under
     // `~/.hyper_plugins/local/` and include it here
